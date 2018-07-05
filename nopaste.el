@@ -86,13 +86,13 @@ Will use `nopaste' in your system's $PATH by default"
   :group 'nopaste)
 
 (defvar nopaste-proc-buffer nil
-  "Log interactions with the subprocess in the given buffer
-  name. For example, can be set to `*nopaste*' to see the output
+  "Log interactions with the subprocess in the given buffer name.
+For example, can be set to `*nopaste*' to see the output
   of the command interactively.")
 
 (defvar nopaste-proc-buffer-errors "*nopaste-errors*"
-  "Buffer name where to send errors from the subprocess. Can be
-  set to `nil' to use the same buffer as `nopaste-proc-buffer`,
+  "Buffer name where to send errors from the subprocess.
+Can be set to nil to use the same buffer as `nopaste-proc-buffer`,
   but that also has the side-effect of sending errors to the
   `nopaste--filter' which might be confusing because errors will
   be mixed with URLs.")
@@ -173,11 +173,10 @@ Will use `nopaste' in your system's $PATH by default"
     (visual-basic-mode . "vb")
     (xml-mode . "xml")
     (yaml-mode . "properties"))
-  "Alist composed of major-mode names and corresponding pastebin
-highlight formats.
+  "Major-mode names and corresponding pastebin highlight formats.
 
 This'll be used as the default `LANGUAGE' parameter to
-`nopaste'. Of course it's only a default, some nopaste(1)
+`nopaste'.  Of course it's only a default, some nopaste(1)
 services take e.g. \"Perl\" instead of \"perl\", or maybe
 \"yaml\" instead of \"properties\".
 
@@ -246,7 +245,9 @@ and `END' aren't optional, i.e it also takes `NICKNAME'
   "Append output of command to the assigned process buffer.
 
    Cargo-culted from the `Filter functions' topic in the Elisp
-   info manual"
+   info manual
+Argument PROC the process emitting the output.
+Argument STRING the string emitted."
   (when (buffer-live-p (process-buffer proc))
     (with-current-buffer (process-buffer proc)
       (let ((moving (= (point) (process-mark proc))))
@@ -258,7 +259,9 @@ and `END' aren't optional, i.e it also takes `NICKNAME'
         (if moving (goto-char (process-mark proc)))))))
 
 (defun nopaste--filter (proc string)
-  "handle async output from `nopaste-region'"
+  "Handle async output from `nopaste-region'.
+Argument PROC the process emitting the output.
+Argument STRING the string emitted."
   (when nopaste-proc-buffer
     (nopaste--ordinary-insertion-filter proc string))
   ;; TODO: the chomp might want to check for errors if the
@@ -270,7 +273,9 @@ and `END' aren't optional, i.e it also takes `NICKNAME'
     (setq nopaste--last-url url)))
 
 (defun nopaste--sentinel (proc event)
-  "handle errors from async process"
+  "Handle errors from async process.
+Argument PROC the process emitting the signal.
+Argument EVENT event fired by process."
   (let ((err-fmt "Paste command %s failed with exit value %d")
         (status (process-exit-status proc)))
     (unless (= 0 status)
