@@ -4,7 +4,9 @@
 
 ;; Author: Ævar Arnfjörð Bjarmason <avar@cpan.org>
 ;; Created: 2007-11-22
+;; Version: 1.0
 ;; Keywords: comm
+;; URL: https://github.com/anarcat/nopaste/
 
 ;; This file is not a part of GNU Emacs.
 
