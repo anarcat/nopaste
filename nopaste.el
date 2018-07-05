@@ -194,6 +194,7 @@ http://www.emacswiki.org/emacs/pastebin.el"
   "The last channel provided or nil if none.  For internal use.")
 (defvar nopaste--last-url nil "The last URL from the paste server.")
 
+;;;###autoload
 (defun nopaste (&optional start end nickname description channel language)
    "Shell out to the nopaste(1) program with the current region or buffer.
 
@@ -209,6 +210,7 @@ and `LANGUAGE'."
     (setq start (point-min) end (point-max)))
   (nopaste-region start end nickname description channel language))
 
+;;;###autoload
 (defun nopaste-region (start end &optional nickname description channel language)
   "Nopaste a given region, nopaste will be called with `call-process-region'.
 
