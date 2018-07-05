@@ -5,6 +5,7 @@
 ;; Author: Ævar Arnfjörð Bjarmason <avar@cpan.org>
 ;; Created: 2007-11-22
 ;; Version: 1.0
+;; Package-Requires: ((emacs "25"))
 ;; Keywords: comm
 ;; URL: https://github.com/anarcat/nopaste/
 
